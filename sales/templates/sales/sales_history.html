@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sales History
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <h2 class='mt-4'>Sales History</h2>
+        <table class="table mt-4 table-bordered text-center table table-striped table-valign-middle datatable">
+            <thead>
+              <tr>
+                <th scope="col">Order No</th>
+                <th scope="col">Customer</th>
+                <th scope="col">item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price Per Stock</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Date</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for row in model %}
+                    <tr>
+                        <td>{{ row.order_no }}</td>
+                        <td>{{ row.customer }}</td>
+                        <td>{{ row.item }}</td>
+                        <td>{{ row.quantity }}</td>
+                        <td>{{ row.price }}</td>
+                        <td>{{ row.total_price }}</td>
+                        <td>{{ row.date }}</td>
+                        <td><a class='btn btn-danger' href={% url 'delete-sale' row.order_no %}>Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}

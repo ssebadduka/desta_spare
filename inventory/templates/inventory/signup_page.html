@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Sign Up
+{% endblock  %}
+
+{% block content %}
+<div class="container w-50 p-3">
+    <h2>Register new user</h2>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="InputUsername" class="form-label">Username</label>
+            <input type="user" class="form-control" id="InputUsername" name="username">
+        </div>
+
+        <div class="mb-3">
+            <label for="InputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="InputPassword" name="password">
+        </div>
+
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <button type="submit" class="btn btn-dark">Register</button>
+        </div>
+        <br>
+
+        {% if existing_user %}
+            <div class="alert alert-danger mt-5" role="alert">
+                <h2>Username already exists. Please choose a different one.</h2>
+            </div>
+        {% elif invalid_request %}
+            <div class="alert alert-danger mt-5" role="alert">
+                <h2>Invalid request. Please retry.</h2>
+            </div>
+        {% elif new_user %}
+            <div class="alert alert-success mt-5" role="alert">
+                <h4 class="alert-heading">Congrats!</h4>
+                <p>User was created successfully.</p>
+                <hr>
+                <a class="btn btn-primary" href="{% url 'sign-in' %}">Please Sign In</a>
+            </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock  %}

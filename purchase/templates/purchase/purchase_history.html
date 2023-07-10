@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Purchase History
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <h2 class='mt-4'>Purchase History</h2>
+        <table class="table mt-4 table-bordered text-center table table-striped table-valign-middle datatable">
+            <thead>
+              <tr>
+                <th scope="col">Order No</th>
+                <th scope="col">item</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Quantity Purchased</th>
+                <th scope="col">Price Per Stock</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Date</th>
+                <th scope="col">Option</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for purchase in purchases %}
+                    <tr>
+                        <td>{{ purchase.order_no }}</td>
+                        <td>{{ purchase.item }}</td>
+                        <td>{{ purchase.supplier }}</td>
+                        <td>{{ purchase.quantity }}</td>
+                        <td>{{ purchase.price }}</td>
+                        <td>{{ purchase.total_price }}</td>
+                        <td>{{ purchase.date }}</td>
+                        <td><a class='btn btn-danger' href={% url 'delete-purchase' purchase.order_no %}>Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}

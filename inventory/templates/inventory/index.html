@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Inventory
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <h3 class='mt-4 mb-4'> Welcome {{user.username|capfirst}} </h3>
+        <table class="table table-hover table-bordered text-center table table-striped table-valign-middle datatable">
+            <thead>
+              <tr>
+                <th scope="col">Sl No</th>
+                <th scope="col">item</th>
+                <th scope="col">Available</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for row in model %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ row.item }}</td>
+                        <td>{{ row.available_quantity }}</td>
+                        <td><a class='btn btn-dark me-4' href={% url 'edit-stock' row.item %}>Edit</a>
+                            {% if request.user.is_staff %}
+                            <a class='btn btn-danger' href={% url 'delete-stock' row.item %}>Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+    <!-- ---------------------------------------------------- -->
+    <!-- --------------------------------------------- -->
+ 
+{% endblock %}

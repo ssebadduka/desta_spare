@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    New Sale
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <form action='' method='post'>
+            {% csrf_token %}
+
+            {{ customer_form }}
+            
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+                <div class='formset'>
+                    {% crispy form helper %}
+                </div>
+            {% endfor %}
+        </form>
+
+        {% if not_available %}
+            <div class="alert alert-danger mt-5" role="alert">
+                <h2>Your requested quantity not available in inventory.</h2>
+            </div>
+        {% endif %}
+
+        {% if invalid_request %}
+            <div class="alert alert-danger mt-5" role="alert">
+                <h2>Please enter a valid value</h2>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <script src="{% static 'sales/add_form.js' %}"></script>
+
+{% endblock %}

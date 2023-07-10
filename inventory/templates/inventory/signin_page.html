@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign-in
+{% endblock  %}
+
+{% block content %}
+<div class="container w-50 p-3">
+    <h2>Sign-in</h2>
+    <br>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputUsername" class="form-label">Username</label>
+            <input type="user" class="form-control" id="exampleInputUsername" name="username">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+        </div>
+
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+
+        {% if not_authenticated %}
+        <br>
+        <div class="alert alert-danger mt-5" role="alert">
+            <h2>You have entered an invalid username or password. Please enter a valid username and password.</h2>
+        </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock  %}
